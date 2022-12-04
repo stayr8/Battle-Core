@@ -9,7 +9,9 @@ public class HeroCombat : MonoBehaviour
 
     public GameObject targetedEnemy;
     public float attackRange;
-    public float rotateSpeedForAttack;
+
+    public GameObject targetedItem;
+    public float itemRange;
 
     private PlayerCtr playerCtr;
 
@@ -50,6 +52,21 @@ public class HeroCombat : MonoBehaviour
                         // Start Coroutine To Attack
                     }
                 }
+            }
+        }
+        else if(targetedItem != null)
+        {
+            if (Vector3.Distance(gameObject.transform.position, targetedItem.transform.position) > itemRange)
+            {
+                playerCtr.agent.SetDestination(targetedItem.transform.position);
+                playerCtr.agent.stoppingDistance = itemRange;
+
+                // Character Dir get
+                var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
+                var dirXZ = new Vector3(dir.x, 0f, dir.z);
+                Quaternion targetRot = Quaternion.LookRotation(dirXZ);
+                playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+
             }
         }
     }

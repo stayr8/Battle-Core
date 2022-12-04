@@ -40,12 +40,6 @@ public class Interactable : MonoBehaviour
         hasInteracted = false;
     }
 
-    public void OnDefocused()
-    {
-        isFocus = false;
-        player = null;
-        hasInteracted = false;
-    }
 
     private void OnDrawGizmosSelected()
     {

@@ -5,6 +5,10 @@ using UnityEngine;
 public class Targetable : MonoBehaviour
 {
     
-    public enum EnemyType { Minion }
-    public EnemyType enemyType;
+    public enum TargetType { 
+        Minion,
+        item
+    }
+    public TargetType targetType;
+
 }

@@ -46,19 +46,10 @@ public class StandingState : State
 
             if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100, layerMask))
             {
-                if (hit.transform.gameObject.tag != "UI" || hit.transform.gameObject.tag != "Enemy")
+                if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
                 {
                     SetDestination(hit.point);
-                    //playerCtr.heroCombat.targetedEnemy = null;
                     playerCtr.agent.stoppingDistance = 0;
-                }
-            }
-            if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100))
-            {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                if (interactable != null)
-                {
-                    SetFocus(interactable, hit.point);
                 }
             }
         }
@@ -105,6 +96,18 @@ public class StandingState : State
                 }
             }
         }
+        else if(playerCtr.heroCombat.targetedItem != null)
+        {
+            if (playerCtr.heroCombat.targetedItem.GetComponent<HeroCombat>() != null)
+            {
+                if (!playerCtr.heroCombat.targetedItem.GetComponent<HeroCombat>().isHeroAlive)
+                {
+                    playerCtr.heroCombat.targetedItem = null;
+                }
+            }
+        }
+
+
         playerCtr.animator.SetFloat("speed", playerCtr.agent.velocity.magnitude);
         // Attack In
         if (attack)
@@ -151,52 +154,6 @@ public class StandingState : State
         isMove = true;
     }
 
-
-    void SetFocus(Interactable newFocus, Vector3 dest)
-    {
-        if (newFocus != playerCtr.focus)
-        {
-            if (playerCtr.focus != null)
-            {
-                playerCtr.focus.OnDefocused();
-            }
-            playerCtr.focus = newFocus;
-            FollowTarget(newFocus);
-            //playerCtr.agent.SetDestination(dest);
-        }
-
-
-        newFocus.OnFocused(playerCtr.transform);
-
-    }
-
-    void RemoveFocus()
-    {
-        if (playerCtr.focus != null)
-        {
-            playerCtr.focus.OnDefocused();
-        }
-        playerCtr.focus = null;
-        StopFollowingTarget();
-
-    }
-
-    public void FollowTarget(Interactable newTarget)
-    {
-        playerCtr.agent.stoppingDistance = newTarget.radius * 0.6f;
-
-
-        playerCtr.target = newTarget.interactionTransform;
-        RemoveFocus();
-    }
-
-    public void StopFollowingTarget()
-    {
-        playerCtr.agent.stoppingDistance = 0f;
-
-
-        playerCtr.target = null;
-    }
 
     public override void Exit()
     {

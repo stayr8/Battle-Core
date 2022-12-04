@@ -26,14 +26,25 @@ public class InputTargeting : MonoBehaviour
                 // If the minion is targetable
                 if(hit.collider.GetComponent<Targetable>() != null)
                 {
-                    if(hit.collider.gameObject.GetComponent<Targetable>().enemyType == Targetable.EnemyType.Minion)
+                    if(hit.collider.gameObject.GetComponent<Targetable>().targetType == Targetable.TargetType.Minion)
                     {
                         selectedHero.GetComponent<HeroCombat>().targetedEnemy = hit.collider.gameObject;
+                    }
+                    else if (hit.collider.gameObject.GetComponent<Targetable>().targetType == Targetable.TargetType.item)
+                    {
+                        Interactable interactable = hit.collider.GetComponent<Interactable>();
+                        selectedHero.GetComponent<HeroCombat>().targetedItem = hit.collider.gameObject;
+                        if (interactable != null)
+                        {
+                            //SetFocus(interactable, hit.point);
+                            interactable.OnFocused(selectedHero.transform);
+                        }
                     }
                 }
                 else if(hit.collider.gameObject.GetComponent<Targetable>() == null)
                 {
                     selectedHero.GetComponent<HeroCombat>().targetedEnemy = null;
+                    selectedHero.GetComponent<HeroCombat>().targetedItem = null;
                 }
             }
         }

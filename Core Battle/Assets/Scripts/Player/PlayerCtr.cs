@@ -30,8 +30,6 @@ public class PlayerCtr : MonoBehaviour
     [HideInInspector]
     public HeroCombat heroCombat;
 
-    public Interactable focus;
-    public Transform target;
 
     public bool skill;
 
