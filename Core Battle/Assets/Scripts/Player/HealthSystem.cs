@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class HealthSystem : MonoBehaviour
 
     public Image frontHealthBar;
     public Image backHealthBar;
+    public TextMeshProUGUI healthText;
 
     [SerializeField] GameObject hitVFX;
     [SerializeField] GameObject ragdoll;
@@ -70,6 +72,7 @@ public class HealthSystem : MonoBehaviour
             percentComplete = percentComplete * percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentComplete);
         }
+        healthText.text = Mathf.Round(CurrentHealth) + "/" + Mathf.Round(MaxHealth);
     }
 
     public void RestoreHealth(float healAmount)
