@@ -27,9 +27,13 @@ public class PlayerCtr : MonoBehaviour
     public Rigidbody rigid;
     [HideInInspector]
     public Vector3 playerVelocity;
+    [HideInInspector]
+    public HeroCombat heroCombat;
 
     public Interactable focus;
     public Transform target;
+
+    public bool skill;
 
     //Photon
     public Vector3 currPos;
@@ -52,6 +56,7 @@ public class PlayerCtr : MonoBehaviour
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         agent = GetComponent<NavMeshAgent>();
         rigid = GetComponentInChildren<Rigidbody>();
+        heroCombat = GetComponent<HeroCombat>();
         agent.updateRotation = false;
 
 

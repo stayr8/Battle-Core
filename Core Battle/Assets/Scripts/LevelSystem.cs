@@ -16,7 +16,7 @@ public class LevelSystem : MonoBehaviour
     public Image frontXpBar;
     public Image backXpBar;
     public TextMeshProUGUI levelText;
-    public TextMeshProUGUI xpText;
+
 
     [Header("Multipliers")]
     [Range(1f, 300f)]
@@ -32,7 +32,7 @@ public class LevelSystem : MonoBehaviour
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequiredXp();
-        levelText.text = "Level " + level;
+        levelText.text = "" + level;
 
     }
 
@@ -64,7 +64,6 @@ public class LevelSystem : MonoBehaviour
                 frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
             }
         }
-        xpText.text = currentXp + "/" + requiredXp;
     }
 
     public void GainExperienceFlatRate(float xpGained)
@@ -97,7 +96,7 @@ public class LevelSystem : MonoBehaviour
         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
         GetComponent<HealthSystem>().IncreaseHealth(level);
         requiredXp = CalculateRequiredXp();
-        levelText.text = "Level " + level;
+        levelText.text = "" + level;
     }
 
     private int CalculateRequiredXp()

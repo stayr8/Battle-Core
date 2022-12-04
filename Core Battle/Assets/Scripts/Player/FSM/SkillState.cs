@@ -6,6 +6,8 @@ public class SkillState : State
     float clipLength;
     float clipSpeed;
 
+    private Vector3 SkillDir;
+
     public SkillState(PlayerCtr _playerCtr, StateMachine _stateMachine) : base(_playerCtr, _stateMachine)
     {
         playerCtr = _playerCtr;
@@ -17,6 +19,9 @@ public class SkillState : State
         base.Enter();
 
         timePassed = 0f;
+
+        SkillDir = playerCtr.standing.Dir;
+        
     }
 
     public override void Exit()
@@ -49,6 +54,14 @@ public class SkillState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        
+        // 방향 계속 최신화
+        var dir = SkillDir - playerCtr.transform.position;
+        var dirXZ = new Vector3(dir.x, 0f, dir.z);
+        Quaternion targetRot = Quaternion.LookRotation(dirXZ);
+        playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+        
     }
 
     

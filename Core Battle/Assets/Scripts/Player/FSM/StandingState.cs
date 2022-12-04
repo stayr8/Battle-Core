@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class StandingState : State
 {
-    
+
     bool isMove;
     public bool attack;
-    public bool skill;
-    
+    public bool skillCheck;
+
 
     public Vector3 Dir;
 
@@ -23,7 +23,8 @@ public class StandingState : State
 
         isMove = false;
         attack = false;
-        skill = false;
+        playerCtr.skill = false;
+        skillCheck = false;
         // 플레이어 속도 받아옴.
         playerCtr.agent.speed = playerCtr.playerSpeed;
     }
@@ -32,7 +33,7 @@ public class StandingState : State
     {
         base.HandleInput();
 
-        if(EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
@@ -48,12 +49,14 @@ public class StandingState : State
                 if (hit.transform.gameObject.tag != "UI" || hit.transform.gameObject.tag != "Enemy")
                 {
                     SetDestination(hit.point);
+                    //playerCtr.heroCombat.targetedEnemy = null;
+                    playerCtr.agent.stoppingDistance = 0;
                 }
             }
-            if(Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
-                if(interactable != null)
+                if (interactable != null)
                 {
                     SetFocus(interactable, hit.point);
                 }
@@ -62,7 +65,10 @@ public class StandingState : State
         // 좌 클릭시 공격
         if (Input.GetMouseButtonDown(0))
         {
-            attack = true;
+            if (!skillCheck)
+            {
+                attack = true;
+            }
             RaycastHit hits;
             if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hits))
             {
@@ -73,12 +79,14 @@ public class StandingState : State
             }
         }
         // Q 클릭
-        if(Input.GetButtonDown("Skill_1"))
+        if (Input.GetButtonDown("Skill_1"))
         {
-            if(!skill)
+            if (!playerCtr.skill)
             {
-                skill = true;
+                skillCheck = true;
+                //skill = true;
             }
+
         }
 
     }
@@ -86,19 +94,30 @@ public class StandingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+
+        if (playerCtr.heroCombat.targetedEnemy != null)
+        {
+            if (playerCtr.heroCombat.targetedEnemy.GetComponent<HeroCombat>() != null)
+            {
+                if (!playerCtr.heroCombat.targetedEnemy.GetComponent<HeroCombat>().isHeroAlive)
+                {
+                    playerCtr.heroCombat.targetedEnemy = null;
+                }
+            }
+        }
         playerCtr.animator.SetFloat("speed", playerCtr.agent.velocity.magnitude);
         // Attack In
-        if(attack)
+        if (attack)
         {
             playerCtr.agent.enabled = false;
             playerCtr.animator.SetTrigger("attack");
             stateMachine.ChangeState(playerCtr.attacking);
         }
-        else if(skill)
+        else if (playerCtr.skill)
         {
             playerCtr.agent.enabled = false;
             playerCtr.animator.SetTrigger("skill_1");
+            skillCheck = false;
             stateMachine.ChangeState(playerCtr.skilling);
         }
     }
@@ -135,7 +154,7 @@ public class StandingState : State
 
     void SetFocus(Interactable newFocus, Vector3 dest)
     {
-        if(newFocus != playerCtr.focus)
+        if (newFocus != playerCtr.focus)
         {
             if (playerCtr.focus != null)
             {
@@ -146,9 +165,9 @@ public class StandingState : State
             //playerCtr.agent.SetDestination(dest);
         }
 
-        
+
         newFocus.OnFocused(playerCtr.transform);
-        
+
     }
 
     void RemoveFocus()
