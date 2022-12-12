@@ -15,10 +15,14 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public string gameVersion = "CoreBattle 1.0";
     public string playerID = "";
 
+    //인게임
     public void SetPlayer()
     {
         OnLogin();
     }
+    //인게임
+
+
 
     public override void OnConnectedToMaster()
     {
