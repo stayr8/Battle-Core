@@ -27,7 +27,7 @@ public class AttackState : State
         timePassed = 0f;
         
         // 공격 시 이동 중지
-        //playerCtr.animator.SetFloat("speed", 0);
+        playerCtr.animator.SetFloat("speed", 0);
         // 공격 방향 위치 값 get
         if (playerCtr.standing.attack)
         {
@@ -56,7 +56,7 @@ public class AttackState : State
                 if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
                 {
                     playerCtr.agent.SetDestination(hit.point);
-                    //playerCtr.agent.stoppingDistance = 0;
+                    playerCtr.agent.stoppingDistance = 0;
                 }
             }
         }
