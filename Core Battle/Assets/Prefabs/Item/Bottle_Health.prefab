@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9153716162357784951}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 9153716159606083303}
   - component: {fileID: 9059503377540485533}
   - component: {fileID: 9062439618193423021}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GlowParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 9183825841948785035}
   - component: {fileID: 9175815715180004069}
   - component: {fileID: 9103815155650409805}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bottle_red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4936,7 +4936,7 @@ GameObject:
   - component: {fileID: 9153716159938872185}
   - component: {fileID: 9059503376770706279}
   - component: {fileID: 9062439617446439831}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StarsParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9724,7 +9724,8 @@ GameObject:
   - component: {fileID: 9153716159560267969}
   - component: {fileID: 8434639592988316634}
   - component: {fileID: 7037279898786400650}
-  m_Layer: 0
+  - component: {fileID: 1317684589}
+  m_Layer: 10
   m_Name: Bottle_Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9773,6 +9774,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550782ddb70fcda4eaee5e041acd7d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 1
   interactionTransform: {fileID: 9153716159560267969}
   item: {fileID: 11400000, guid: e6d7be35ce86a6b4aa6834cce2d76cae, type: 2}
+--- !u!114 &1317684589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9152774757349696265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f5d20556fdde740b2ed3839e62bd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 1

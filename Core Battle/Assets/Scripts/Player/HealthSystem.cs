@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class HealthSystem : MonoBehaviour
 {
     //[SerializeField] float health = 100;
@@ -35,12 +36,12 @@ public class HealthSystem : MonoBehaviour
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         UpdateHealthUI();
     }
-/*
+
     private void FixedUpdate()
     {
-        //AreaControl();
+        AreaControl();
     }
-*/
+
     public void TakeDamage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
@@ -50,25 +51,26 @@ public class HealthSystem : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             Die();
+
         }
     }
 
-    /*
+
     private float deltaDamage = 0;
     public bool onzone = true;
     private void AreaControl()
     {
         Area a = Area.AREA();
-        if(a != null && !onzone)
+        if (a != null && !onzone)
         {
             this.deltaDamage += Time.deltaTime;
-            if(a.actualArea.MustDamege(this.deltaDamage))
+            if (a.actualArea.MustDamage(this.deltaDamage))
             {
                 this.deltaDamage = 0;
                 this.TakeDamage(a.actualArea.Damage);
             }
         }
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,13 +90,13 @@ public class HealthSystem : MonoBehaviour
             onzone = false;
         }
     }
-    */
+
     public void UpdateHealthUI()
     {
         float fillF = frontHealthBar.fillAmount;
         float fillB = backHealthBar.fillAmount;
         float hFraction = CurrentHealth / MaxHealth;
-        if(fillB > hFraction)
+        if (fillB > hFraction)
         {
             frontHealthBar.fillAmount = hFraction;
             backHealthBar.color = Color.red;
@@ -139,4 +141,5 @@ public class HealthSystem : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 }
+
 

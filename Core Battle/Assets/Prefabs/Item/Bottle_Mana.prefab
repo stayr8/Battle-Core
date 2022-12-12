@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1684695721169242412}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 1684695724318516108}
   - component: {fileID: 8058094185080732743}
   - component: {fileID: 845595262205172986}
-  m_Layer: 0
+  - component: {fileID: 8506935960810850465}
+  m_Layer: 10
   m_Name: Bottle_Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687870922017387978}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.9856231, y: 0.558, z: 17.220457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -92,9 +93,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550782ddb70fcda4eaee5e041acd7d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 1
   interactionTransform: {fileID: 1684695724318516108}
   item: {fileID: 11400000, guid: f1ef5c5327654354b92438130bd2c597, type: 2}
+--- !u!114 &8506935960810850465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687870922017387978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f5d20556fdde740b2ed3839e62bd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 1
 --- !u!1 &1687870923242739912
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +120,7 @@ GameObject:
   - component: {fileID: 1684695723758250296}
   - component: {fileID: 1571870476767567130}
   - component: {fileID: 1562174422594946912}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GlowParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4895,7 +4909,7 @@ GameObject:
   - component: {fileID: 1664701825367476194}
   - component: {fileID: 1674985343912733010}
   - component: {fileID: 1602870426329532714}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bottle_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4999,7 +5013,7 @@ GameObject:
   - component: {fileID: 1684695723514807782}
   - component: {fileID: 1571870476584495820}
   - component: {fileID: 1562174428802579868}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StarsParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -112,7 +112,7 @@ public class StandingState : State
         // Attack In
         if (attack)
         {
-            //playerCtr.agent.enabled = false;
+            playerCtr.agent.enabled = false;
             playerCtr.animator.SetTrigger("attack");
             stateMachine.ChangeState(playerCtr.attacking);
         }
