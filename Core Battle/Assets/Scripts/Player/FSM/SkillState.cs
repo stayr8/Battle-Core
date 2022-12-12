@@ -37,7 +37,7 @@ public class SkillState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        
         timePassed += Time.deltaTime;
         clipLength = playerCtr.animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
         clipSpeed = playerCtr.animator.GetCurrentAnimatorStateInfo(1).speed;

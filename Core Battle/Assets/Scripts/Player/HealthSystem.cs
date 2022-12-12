@@ -35,7 +35,12 @@ public class HealthSystem : MonoBehaviour
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         UpdateHealthUI();
     }
-
+/*
+    private void FixedUpdate()
+    {
+        //AreaControl();
+    }
+*/
     public void TakeDamage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
@@ -48,6 +53,42 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    /*
+    private float deltaDamage = 0;
+    public bool onzone = true;
+    private void AreaControl()
+    {
+        Area a = Area.AREA();
+        if(a != null && !onzone)
+        {
+            this.deltaDamage += Time.deltaTime;
+            if(a.actualArea.MustDamege(this.deltaDamage))
+            {
+                this.deltaDamage = 0;
+                this.TakeDamage(a.actualArea.Damage);
+            }
+        }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Area a = Area.AREA();
+        if (a != null && other.gameObject == a.Cylinder.gameObject)
+        {
+            onzone = true;
+            this.deltaDamage = 0;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        Area a = Area.AREA();
+        if (a != null && other.gameObject == a.Cylinder.gameObject)
+        {
+            onzone = false;
+        }
+    }
+    */
     public void UpdateHealthUI()
     {
         float fillF = frontHealthBar.fillAmount;
@@ -98,3 +139,4 @@ public class HealthSystem : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 }
+
