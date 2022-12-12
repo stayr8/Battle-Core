@@ -27,7 +27,7 @@ public class AttackState : State
         timePassed = 0f;
         
         // 공격 시 이동 중지
-        playerCtr.animator.SetFloat("speed", 0);
+        //playerCtr.animator.SetFloat("speed", 0);
         // 공격 방향 위치 값 get
         if (playerCtr.standing.attack)
         {
@@ -46,7 +46,20 @@ public class AttackState : State
     {
         base.HandleInput();
 
-        
+        if (Input.GetMouseButton(1))
+        {
+            RaycastHit hit;
+            int layerMask = 1 << 7;
+
+            if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100, layerMask))
+            {
+                if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
+                {
+                    playerCtr.agent.SetDestination(hit.point);
+                    //playerCtr.agent.stoppingDistance = 0;
+                }
+            }
+        }
         // 좌 클릭시 다음 공격
         if (Input.GetMouseButtonDown(0) && 0.3f <= timePassed)
         {

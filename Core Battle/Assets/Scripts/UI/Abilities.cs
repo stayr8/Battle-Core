@@ -95,7 +95,14 @@ public class Abilities : MonoBehaviour
             isCooldown = true;
             abilityImage1.fillAmount = 1;
             _playerCtr.skill = true;
-        }    
+        }
+        else if(skillshot.GetComponent<Image>().enabled == true && Input.GetMouseButton(1))
+        {
+            isCooldown = false;
+            skillshot.GetComponent<Image>().enabled = false;
+            //abilityImage1.fillAmount = 1;
+            _playerCtr.skill = false;
+        }
 
         if(isCooldown)
         {
