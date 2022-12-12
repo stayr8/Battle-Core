@@ -15,7 +15,7 @@ public class PlayerCtr : MonoBehaviour
     public StandingState standing;
     public AttackState attacking;
     public SkillState skilling;
-
+    
 
     [HideInInspector]
     public Animator animator;
