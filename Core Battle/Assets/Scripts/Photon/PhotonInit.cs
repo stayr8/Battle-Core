@@ -191,6 +191,8 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         if (connectionInfo)
             connectionInfo.text = connectionState;
 
+        myList.Clear();
+
         //PhotonNetwork.JoinRandomRoom();
     }
     public override void OnConnectedToMaster()
@@ -298,8 +300,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         {
             CellBtn[i].interactable = (multiple + i < myList.Count) ? true : false;
             CellBtn[i].transform.GetChild(0).GetComponent<Text>().text = (multiple + i < myList.Count) ? myList[multiple + i].Name : "";
-            CellBtn[i].transform.GetChild(1).GetComponent<Text>().text = (multiple + i < myList.Count)
-             ? myList[multiple + i].PlayerCount + "/" + myList[multiple + i].MaxPlayers : "";
+            CellBtn[i].transform.GetChild(1).GetComponent<Text>().text = (multiple + i < myList.Count) ? myList[multiple + i].PlayerCount + "/" + myList[multiple + i].MaxPlayers : "";
         }
     }
 
