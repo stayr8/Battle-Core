@@ -46,7 +46,7 @@ public class StandingState : State
 
             if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100, layerMask))
             {
-                if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
+                if (hit.transform.gameObject.tag != "UI")
                 {
                     SetDestination(hit.point);
                     playerCtr.agent.stoppingDistance = 0;
@@ -54,7 +54,7 @@ public class StandingState : State
             }
         }
         // 좌 클릭시 공격
-        if (Input.GetMouseButtonDown(0) && playerCtr.Melee)
+        if (Input.GetMouseButtonDown(0))
         {
             if (!skillCheck)
             {

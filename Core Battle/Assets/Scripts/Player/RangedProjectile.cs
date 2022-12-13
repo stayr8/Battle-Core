@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class RangedProjectile : MonoBehaviour
 {
-    public float damage;
+    public float speed = 15f;
+    public float hitOffset = 0f;
+    public bool UseFirePointRotation;
+    public Vector3 rotationOffset = new Vector3(0, 0, 0);
+    //public GameObject hits;
+    //public GameObject flash;
+    //public GameObject[] Detached;
+    public GameObject missileTarget;
+
+    public float damage = 10;
     public GameObject target;
 
     public bool targetSet;
@@ -22,29 +31,53 @@ public class RangedProjectile : MonoBehaviour
     private void Start()
     {
         rigid = GetComponentInChildren<Rigidbody>();
+        FieldOfView fieldOfView = GameObject.Find("Player2").GetComponent<FieldOfView>();
+        missileTarget = fieldOfView.targeting;
+        /*
+        if(flash != null)
+        {
+            var flashInstance = Instantiate(flash, transform.position, Quaternion.identity);
+            flashInstance.transform.forward = gameObject.transform.forward;
+            //var flashPs = flashInstance.GetComponent<ParticleSystem>();
+            
+            if(flashPs!=null)
+            {
+                Destroy(flashInstance, flashPs.main, DurationUnit);
+            }
+            else
+            {
+                var flashPsParts = flashInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(flashInstance, flashPsParts.main.duration);
+            }
+        }*/
+        Destroy(gameObject, 5);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(target)
+        if(speed != 0)
         {
-            if(target == null)
+            if(missileTarget != null)
             {
-                Destroy(gameObject);
+                rigid.velocity = transform.forward * speed;
+                Vector3 targetPos = missileTarget.transform.position - transform.position;
+                transform.rotation = Quaternion.LookRotation(targetPos);
             }
-
-            Vector3 targetpos = new Vector3(target.transform.position.x, target.transform.position.y + 1.0f, target.transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetpos, velocity * Time.deltaTime);
-            
+            else
+            {
+                rigid.velocity = transform.forward * speed;
+            }
         }
-        
 
         Destroy(this.gameObject, 3f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        rigid.constraints = RigidbodyConstraints.FreezeAll;
+        speed = 0;
+
         if (collision.gameObject.tag == "Enemy")
         {
             int layerMask = 1 << 9;
@@ -54,10 +87,10 @@ public class RangedProjectile : MonoBehaviour
                 {
                     enemy.TakeDamage(damage);
                     enemy.HitVFX(hit.point);
+                    Destroy(gameObject);
                 }
             }
             
-            Destroy(gameObject);
         }
         else if(collision.gameObject.tag == "Box")
         {

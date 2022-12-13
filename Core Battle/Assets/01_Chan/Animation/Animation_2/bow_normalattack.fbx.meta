@@ -61,7 +61,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.25925925
-        functionName: RangeAttack
+        functionName: RangedAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
