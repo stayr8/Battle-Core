@@ -14,26 +14,34 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 {
     public static PhotonInit instance;
 
+    [Header("GameObject")]
     public GameObject LobbyPanel;
     public GameObject MakeRoomPanel;
     public GameObject RoomPanel;
     public GameObject PwPanel;
     public GameObject PwErrorLog;
+    public GameObject PwConfirmBtn;
+    public GameObject PWPanelCloseBtn;
 
+    [Header("InputField")]
     public InputField PlayerInput;
     public InputField RoomInput;
     public InputField RoomPwInput;
     public InputField PwCheckIF;
 
+    [Header("Toggle")]
     public Toggle PwToggle;
 
+    [Header("Button")]
     public Button[] CellBtn;
+    public Button CreateRoomBtn;
     public Button PreviousBtn;
     public Button NextBtn;
-    public Button CreateRoomBtn;
 
+    [Header("var")]
     public string gameVersion = "CoreBattle 1.0";
     public string playerID = "";
+    public string privateRoom;
     public int hashtablecount;
 
     private bool isGameStart = false;
@@ -73,7 +81,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 
             OnLogin();
         }
-        else if (isGameStart == true && isLogin == true)
+        else
         {
             PlayerInput.text = string.Empty;
         }
@@ -117,7 +125,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 
         if (PwToggle.isOn)
         {
-            PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Game" + Random.Range(0, 100) : RoomInput.text, roomOptions);
+            PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Game" + Random.Range(0, 100) : "*" + RoomInput.text, roomOptions);
         }
         else
         {
@@ -180,6 +188,30 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         else
         {
             StartCoroutine("ShowPwWrongMsg");
+        }
+    }
+    public void OnLogin()
+    {
+        PhotonNetwork.NickName = this.playerID;
+
+        if (PhotonNetwork.IsConnected)
+        {
+            connectionState = "룸에 접속 중...";
+            if (connectionInfo)
+                connectionInfo.text = connectionState;
+
+            LobbyPanel.SetActive(false);
+            RoomPanel.SetActive(true);
+
+            PhotonNetwork.JoinLobby();
+        }
+        else
+        {
+            connectionState = "마스터 서버 연결 불가능, 재접속 중...";
+            if (connectionInfo)
+                connectionInfo.text = connectionState;
+
+            PhotonNetwork.ConnectUsingSettings();
         }
     }
 
@@ -262,30 +294,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         MyListRenewal();
     }
 
-    private void OnLogin()
-    {
-        PhotonNetwork.NickName = this.playerID;
-
-        if (PhotonNetwork.IsConnected)
-        {
-            connectionState = "룸에 접속 중...";
-            if (connectionInfo)
-                connectionInfo.text = connectionState;
-
-            LobbyPanel.SetActive(false);
-            RoomPanel.SetActive(true);
-
-            PhotonNetwork.JoinLobby();
-        }
-        else
-        {
-            connectionState = "마스터 서버 연결 불가능, 재접속 중...";
-            if (connectionInfo)
-                connectionInfo.text = connectionState;
-
-            PhotonNetwork.ConnectUsingSettings();
-        }
-    }
     private void MyListRenewal()
     {
         maxPage = (myList.Count % CellBtn.Length == 0)
@@ -320,7 +328,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         if (connectionInfo)
             connectionInfo.text = connectionState;
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
@@ -329,6 +337,10 @@ public class PhotonInit : MonoBehaviourPunCallbacks
             isGameStart = true;
         }
     }
+    //private void OnGUI()
+    //{
+    //    GUILayout.Label(connectionState);
+    //}
 
     IEnumerator ShowPwWrongMsg()
     {
