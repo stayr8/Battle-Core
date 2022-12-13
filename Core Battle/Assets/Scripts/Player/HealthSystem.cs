@@ -8,7 +8,7 @@ using TMPro;
 public class HealthSystem : MonoBehaviour
 {
     //[SerializeField] float health = 100;
-    [SerializeField] private float MaxHealth = 100.0f;
+    [SerializeField] public float MaxHealth = 100.0f;
     [SerializeField] private float lerpTimer;
     [SerializeField] private float CurrentHealth;
     [SerializeField] private float chipSpeed = 2;

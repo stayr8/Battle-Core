@@ -18,6 +18,13 @@ public class HeroCombat : MonoBehaviour
     public bool basicAtkIdle = false;
     public bool isHeroAlive;
     public bool performMeleeAttack = true;
+    public bool isMove = false;
+
+    [Header("Ranged Varialbes")]
+    public bool performRangeAttack = true;
+    public GameObject projPrefab;
+    public Transform projSpawnPoint;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,22 +41,34 @@ public class HeroCombat : MonoBehaviour
             {
                 playerCtr.agent.SetDestination(targetedEnemy.transform.position);
                 playerCtr.agent.stoppingDistance = attackRange;
-
-                // Character Dir get
-                var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
-                var dirXZ = new Vector3(dir.x, 0f, dir.z);
-                Quaternion targetRot = Quaternion.LookRotation(targetedEnemy.transform.position - dirXZ);
-                playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
-
+                isMove = true;
             }
             else
             {
+                // MELEE CHARACTER
                 if(heroAttackType == HeroAttackType.Melee)
                 {
-                    if(performMeleeAttack)
+
+                    playerCtr.agent.SetDestination(transform.position);
+                    isMove = true;
+
+                    if (performMeleeAttack)
                     {
                         Debug.Log("Attack The Minion");
-                        // Start Coroutine To Attack
+                        StartCoroutine(MeleeAttackInterval());
+                    }
+                }
+
+                // RANGED CHARACTER
+                if (heroAttackType == HeroAttackType.Ranged)
+                {
+
+                    playerCtr.agent.SetDestination(transform.position);
+                    isMove = true;
+                    if (performRangeAttack)
+                    {
+                        Debug.Log("Attack The Minion");
+                        StartCoroutine(RangedAttackInterval());
                     }
                 }
             }
@@ -60,14 +79,75 @@ public class HeroCombat : MonoBehaviour
             {
                 playerCtr.agent.SetDestination(targetedItem.transform.position);
                 playerCtr.agent.stoppingDistance = itemRange;
-
-                // Character Dir get
-                var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
-                var dirXZ = new Vector3(dir.x, 0f, dir.z);
-                Quaternion targetRot = Quaternion.LookRotation(dirXZ);
-                playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
-
+                isMove = true;
             }
+        }
+        if (isMove && targetedEnemy != null)
+        {
+            // Character move stop
+            if (playerCtr.agent.velocity.magnitude == 0f)
+            {
+                isMove = false;
+                return;
+            }
+            // Character Dir get
+            var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
+            var dirXZ = new Vector3(dir.x, 0f, dir.z);
+            Quaternion targetRot = Quaternion.LookRotation(targetedEnemy.transform.position - dirXZ);
+            playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+        }
+    }
+
+    IEnumerator MeleeAttackInterval()
+    {
+        performMeleeAttack = false;
+
+        yield return new WaitForSeconds(playerCtr.playerAtkSpeed / ((100 + playerCtr.playerAtkSpeed) * 0.01f));
+
+        if(targetedEnemy == null)
+        {
+            performMeleeAttack = true;
+        }
+    }
+
+    IEnumerator RangedAttackInterval()
+    {
+        performRangeAttack = false;
+        playerCtr.animator.SetBool("attack", true);
+
+        yield return new WaitForSeconds(playerCtr.playerAtkSpeed / ((100 + playerCtr.playerAtkSpeed) * 0.01f));
+
+        if (targetedEnemy == null)
+        {
+            playerCtr.animator.SetBool("attack", false);
+            performRangeAttack = true;
+        }
+    }
+
+    public void RangeAttack()
+    {
+        if(targetedEnemy != null)
+        {
+            if(targetedEnemy.GetComponent<Targetable>().targetType == Targetable.TargetType.Minion)
+            {
+                SpawnRangedProj("Minion", targetedEnemy);
+            }
+        }
+        performRangeAttack = true;
+    }
+
+    void SpawnRangedProj(string typeOfEnemy, GameObject targetedEnemyObj)
+    {
+        float dmg = playerCtr.playerAtk;
+
+        Instantiate(projPrefab, projSpawnPoint.transform.position, Quaternion.Euler(new Vector3(-90,0,0)));
+
+        if(typeOfEnemy == "Minion")
+        {
+            projPrefab.GetComponent<RangedProjectile>().targetType = typeOfEnemy;
+
+            projPrefab.GetComponent<RangedProjectile>().target = targetedEnemyObj;
+            projPrefab.GetComponent<RangedProjectile>().targetSet = true;
         }
     }
 }

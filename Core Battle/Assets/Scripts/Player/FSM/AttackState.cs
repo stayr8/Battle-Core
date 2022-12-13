@@ -53,10 +53,13 @@ public class AttackState : State
 
             if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hit, 100, layerMask))
             {
-                if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
+                if (playerCtr.Melee)
                 {
-                    playerCtr.agent.SetDestination(hit.point);
-                    playerCtr.agent.stoppingDistance = 0;
+                    if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
+                    {
+                        playerCtr.agent.SetDestination(hit.point);
+                        playerCtr.agent.stoppingDistance = 0;
+                    }
                 }
             }
         }

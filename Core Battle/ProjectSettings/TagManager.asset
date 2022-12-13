@@ -7,6 +7,10 @@ TagManager:
   - Object
   - Ground
   - Enemy
+  - FxTemporaire
+  - Bullet
+  - Arrow
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -2340,11 +2340,11 @@ GameObject:
   - component: {fileID: 240426613461115973}
   - component: {fileID: 6720032961386035910}
   - component: {fileID: 7943576759553934589}
-  - component: {fileID: 8606725434423197841}
   - component: {fileID: 7840302899264231916}
   - component: {fileID: 9116385884710432490}
-  - component: {fileID: 7943576759553934590}
   - component: {fileID: 7943576759553934593}
+  - component: {fileID: 7943576759553934583}
+  - component: {fileID: 7943576759553934590}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -2495,21 +2495,6 @@ MonoBehaviour:
   hitVFX: {fileID: 1743637094903878, guid: 021a2f7a2c5bc4449b4c64a66a050e8c, type: 3}
   ragdoll: {fileID: 6421397963695188604, guid: 41d94746122781747a26902eeb894cf1, type: 3}
   onzone: 1
---- !u!114 &8606725434423197841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631759331366174689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4da87813b56ee3479686719e26d78b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slash: {fileID: 4239663697579050731, guid: efaef22c536b9aa428d9f2c146c34c22, type: 3}
-  ST: {fileID: 5194032699920446138}
-  currentWeaponInHand: {fileID: 5659479671923144330}
 --- !u!114 &7840302899264231916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2559,6 +2544,41 @@ MonoBehaviour:
   abilityImage4: {fileID: 0}
   cooldown4: 5
   ability4: 114
+--- !u!114 &7943576759553934593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631759331366174689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf549ed5e905ee408a188209c37bd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroAttackType: 0
+  targetedEnemy: {fileID: 0}
+  attackRange: 2
+  targetedItem: {fileID: 0}
+  itemRange: 1
+  basicAtkIdle: 0
+  isHeroAlive: 0
+  performMeleeAttack: 1
+--- !u!114 &7943576759553934583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631759331366174689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4da87813b56ee3479686719e26d78b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slash: {fileID: 4239663697579050731, guid: efaef22c536b9aa428d9f2c146c34c22, type: 3}
+  ST: {fileID: 974593934585368911}
+  currentWeaponInHand: {fileID: 5659479671923144330}
 --- !u!114 &7943576759553934590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,26 +2601,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7943576759553934593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631759331366174689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf549ed5e905ee408a188209c37bd3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroAttackType: 0
-  targetedEnemy: {fileID: 0}
-  attackRange: 2
-  targetedItem: {fileID: 0}
-  itemRange: 1
-  basicAtkIdle: 0
-  isHeroAlive: 0
-  performMeleeAttack: 1
 --- !u!1 &2714022498148251860
 GameObject:
   m_ObjectHideFlags: 0

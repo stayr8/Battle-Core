@@ -54,7 +54,7 @@ public class StandingState : State
             }
         }
         // 좌 클릭시 공격
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && playerCtr.Melee)
         {
             if (!skillCheck)
             {

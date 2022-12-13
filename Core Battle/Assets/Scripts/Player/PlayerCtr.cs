@@ -9,6 +9,8 @@ public class PlayerCtr : MonoBehaviour
     public float playerSpeed = 5.0f;
     public float playerAtk = 10.0f;
     public float playerAtkSpeed = 1.0f;
+    public bool Melee = false;
+    public bool Ranged = false;
 
 
     public StateMachine movementSM;
