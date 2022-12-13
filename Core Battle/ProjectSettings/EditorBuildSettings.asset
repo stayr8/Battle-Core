@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/LoginScene.unity
     guid: c4cbb096b75ddec47b9259275e3e03a7
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
-    guid: 52d3a789f77daab4cae56699035c0eb4
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: d9c728b0111157f4999ba0cecb8450dd
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/TestScene.unity
+    guid: 52d3a789f77daab4cae56699035c0eb4
   m_configObjects: {}
