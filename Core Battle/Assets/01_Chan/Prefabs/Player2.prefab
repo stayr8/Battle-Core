@@ -23,14 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443668498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.095, y: 1.189, z: 0.644}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.09499979, y: 1.189, z: 0.69599915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 952335620645744993}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &21105152942589678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1126,8 @@ GameObject:
   - component: {fileID: 774013642800757903}
   - component: {fileID: 774013642800757902}
   - component: {fileID: 774013642800757897}
+  - component: {fileID: 543450651904346591}
+  - component: {fileID: 543450651904346592}
   m_Layer: 8
   m_Name: Player2
   m_TagString: Player
@@ -1242,14 +1244,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf549ed5e905ee408a188209c37bd3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroAttackType: 0
+  heroAttackType: 1
   targetedEnemy: {fileID: 0}
-  attackRange: 2
+  attackRange: 7
   targetedItem: {fileID: 0}
   itemRange: 1
   basicAtkIdle: 0
   isHeroAlive: 0
-  performMeleeAttack: 1
+  performMeleeAttack: 0
+  isMove: 0
   performRangeAttack: 1
   projPrefab: {fileID: 4217706214631637058, guid: dca707d68c585cb48836bb7fde99b369, type: 3}
   projSpawnPoint: {fileID: 443668499}
@@ -1337,10 +1340,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: sung
   playerSpeed: 3.5
-  playerAtk: 50
-  playerAtkSpeed: 1
+  playerAtk: 1
+  playerAtkSpeed: 0.5
   Melee: 0
-  Ranged: 0
+  Ranged: 1
   animator: {fileID: 0}
   camera: {fileID: 0}
   agent: {fileID: 0}
@@ -1372,6 +1375,45 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &543450651904346591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467442658776329179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce196a2e8e15ad64aaa41134fd58a5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projPrefab: {fileID: 4217706214631637058, guid: dca707d68c585cb48836bb7fde99b369, type: 3}
+  projSpawnPoint: {fileID: 443668499}
+  projSpawnpoint2: {fileID: 0}
+--- !u!114 &543450651904346592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467442658776329179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddac129126d42cd4ba17fa34d0002281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 10
+  viewAngle: 82
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  visibleTargets: []
+  targeting: {fileID: 0}
+  shortDis: 0
+  targetingUI: {fileID: 0}
 --- !u!1 &489304348435932952
 GameObject:
   m_ObjectHideFlags: 0

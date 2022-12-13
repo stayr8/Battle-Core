@@ -61,6 +61,14 @@ public class AttackState : State
                         playerCtr.agent.stoppingDistance = 0;
                     }
                 }
+                else if(playerCtr.Ranged)
+                {
+                    if (hit.transform.gameObject.tag != "UI" )
+                    {
+                        playerCtr.agent.SetDestination(hit.point);
+                        playerCtr.agent.stoppingDistance = 1;
+                    }
+                }
             }
         }
         // 좌 클릭시 다음 공격
@@ -108,4 +116,6 @@ public class AttackState : State
         playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
         
     }
+
+    
 }

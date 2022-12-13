@@ -49,27 +49,36 @@ public class HeroCombat : MonoBehaviour
                 // MELEE CHARACTER
                 if (heroAttackType == HeroAttackType.Melee)
                 {
-
-                    playerCtr.agent.SetDestination(transform.position);
+                    // Character Dir get
+                    var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
+                    var dirXZ = new Vector3(dir.x, 0f, dir.z);
+                    Quaternion targetRot = Quaternion.LookRotation(dirXZ);
+                    playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+                    //playerCtr.agent.stoppingDistance = Vector3.Distance(gameObject.transform.position, targetedEnemy.transform.position);
+                    //playerCtr.agent.SetDestination(transform.position)s;
                     isMove = true;
 
                     if (performMeleeAttack)
                     {
-                        Debug.Log("Attack The Minion");
-                        StartCoroutine(MeleeAttackInterval());
+                        //Debug.Log("Attack The Minion");
+                        //StartCoroutine(MeleeAttackInterval());
                     }
                 }
 
                 // RANGED CHARACTER
                 if (heroAttackType == HeroAttackType.Ranged)
                 {
-
-                    playerCtr.agent.SetDestination(transform.position);
+                    var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
+                    var dirXZ = new Vector3(dir.x, 0f, dir.z);
+                    Quaternion targetRot = Quaternion.LookRotation(dirXZ);
+                    playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+                    playerCtr.agent.stoppingDistance = Vector3.Distance(gameObject.transform.position, targetedEnemy.transform.position);
+                    //playerCtr.agent.SetDestination(transform.position);
                     isMove = true;
                     if (performRangeAttack)
                     {
-                        Debug.Log("Attack The Minion");
-                        StartCoroutine(RangedAttackInterval());
+                        //Debug.Log("Attack The Minion");
+                        //StartCoroutine(RangedAttackInterval());
                     }
                 }
             }
@@ -78,6 +87,12 @@ public class HeroCombat : MonoBehaviour
         {
             if (Vector3.Distance(gameObject.transform.position, targetedItem.transform.position) > itemRange)
             {
+                // Character Dir get
+                var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
+                var dirXZ = new Vector3(dir.x, 0f, dir.z);
+                Quaternion targetRot = Quaternion.LookRotation(dirXZ);
+                playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+
                 playerCtr.agent.SetDestination(targetedItem.transform.position);
                 playerCtr.agent.stoppingDistance = itemRange;
                 isMove = true;
@@ -90,14 +105,10 @@ public class HeroCombat : MonoBehaviour
             isMove = false;
             return;
         }
-        // Character Dir get
-        var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
-        var dirXZ = new Vector3(dir.x, 0f, dir.z);
-        Quaternion targetRot = Quaternion.LookRotation(dirXZ);
-        playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+       
 
     }
-
+    /*
     IEnumerator MeleeAttackInterval()
     {
         performMeleeAttack = false;
@@ -123,7 +134,8 @@ public class HeroCombat : MonoBehaviour
             performRangeAttack = true;
         }
     }
-
+    */
+    /*
     public void RangeAttack()
     {
         if (targetedEnemy != null)
@@ -149,5 +161,5 @@ public class HeroCombat : MonoBehaviour
             projPrefab.GetComponent<RangedProjectile>().target = targetedEnemyObj;
             projPrefab.GetComponent<RangedProjectile>().targetSet = true;
         }
-    }
+    }*/
 }
