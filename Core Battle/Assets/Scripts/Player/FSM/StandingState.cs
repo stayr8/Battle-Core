@@ -106,6 +106,7 @@ public class StandingState : State
                 }
             }
         }
+       
 
 
         playerCtr.animator.SetFloat("speed", playerCtr.agent.velocity.magnitude);

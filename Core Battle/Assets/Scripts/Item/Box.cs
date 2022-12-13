@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject go_item_prefab;
+    [SerializeField]
+    private int count;
+
+    [SerializeField]
+    private int hp;
+
+    [SerializeField]
+    private int destroyTime;
+
+    [SerializeField]
+    private BoxCollider col;
+
+    [SerializeField]
+    private GameObject BoxEffect;
+    [SerializeField]
+    private GameObject Boxbreak;
+
+
+    public void Mining()
     {
-        
+        hp--;
+        if(hp <= 0)
+        {
+            Destruction();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Destruction()
     {
-        
+
+        for(int i = 0; i<count; i++)
+        {
+            Instantiate(go_item_prefab, Boxbreak.transform.position, Quaternion.identity);
+        }
+        //col.enabled = false;
+        Boxbreak.SetActive(false);
+        BoxEffect.SetActive(true);
+        Destroy(this.gameObject, destroyTime);
     }
 }
