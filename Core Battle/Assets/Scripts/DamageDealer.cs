@@ -37,6 +37,24 @@ public class DamageDealer : MonoBehaviour
                     hasDealtDamage.Add(hit.transform.gameObject);
                 }
             }
+            int layerMask2 = 1 << 8;
+            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask2))
+            {
+                if (hit.transform.TryGetComponent(out HealthSystem health) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                {
+                    health.TakeDamage(weaponDamage);
+                    health.HitVFX(hit.point);
+                    hasDealtDamage.Add(hit.transform.gameObject);
+                }
+            }
+            int layerMask3 = 1 << 14;
+            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask3))
+            {
+                if (hit.transform.TryGetComponent(out Box box) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                {
+                    box.Mining();
+                }
+            }
         }
     }
 

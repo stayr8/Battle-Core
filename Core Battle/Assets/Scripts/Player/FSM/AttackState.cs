@@ -57,16 +57,16 @@ public class AttackState : State
                 {
                     if (hit.transform.gameObject.tag != "UI" && hit.transform.gameObject.tag != "Enemy")
                     {
-                        playerCtr.agent.SetDestination(hit.point);
-                        playerCtr.agent.stoppingDistance = 0;
+                        //playerCtr.agent.SetDestination(hit.point);
+                        //playerCtr.agent.stoppingDistance = 0;
                     }
                 }
                 else if(playerCtr.Ranged)
                 {
                     if (hit.transform.gameObject.tag != "UI" )
                     {
-                        playerCtr.agent.SetDestination(hit.point);
-                        playerCtr.agent.stoppingDistance = 1;
+                        //playerCtr.agent.SetDestination(hit.point);
+                        //playerCtr.agent.stoppingDistance = 0;
                     }
                 }
             }
@@ -91,7 +91,7 @@ public class AttackState : State
         clipLength = playerCtr.animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
         clipSpeed = playerCtr.animator.GetCurrentAnimatorStateInfo(1).speed;
         // 애니메이션 시간동안 좌클릭시 실행
-        if(timePassed >= clipLength / clipSpeed && attack)
+        if(timePassed >= clipLength / clipSpeed && attack && playerCtr.Melee)
         {
             playerCtr.animator.SetTrigger("attack");
             stateMachine.ChangeState(playerCtr.attacking);

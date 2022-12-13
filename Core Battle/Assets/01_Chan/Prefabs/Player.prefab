@@ -2465,6 +2465,8 @@ MonoBehaviour:
   playerSpeed: 3.5
   playerAtk: 50
   playerAtkSpeed: 1
+  Melee: 1
+  Ranged: 0
   animator: {fileID: 0}
   camera: {fileID: 0}
   agent: {fileID: 0}
@@ -2564,6 +2566,10 @@ MonoBehaviour:
   basicAtkIdle: 0
   isHeroAlive: 0
   performMeleeAttack: 1
+  isMove: 0
+  performRangeAttack: 1
+  projPrefab: {fileID: 0}
+  projSpawnPoint: {fileID: 0}
 --- !u!114 &7943576759553934583
 MonoBehaviour:
   m_ObjectHideFlags: 0
