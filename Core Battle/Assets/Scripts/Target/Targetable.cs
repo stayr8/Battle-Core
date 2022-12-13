@@ -7,7 +7,8 @@ public class Targetable : MonoBehaviour
     
     public enum TargetType { 
         Minion,
-        item
+        item,
+        Box
     }
     public TargetType targetType;
 

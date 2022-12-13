@@ -59,7 +59,12 @@ public class RangedProjectile : MonoBehaviour
             
             Destroy(gameObject);
         }
+        else if(collision.gameObject.tag == "Box")
+        {
+            collision.transform.GetComponent<Box>().Mining();
+        }
     }
+    
     
 
 }
