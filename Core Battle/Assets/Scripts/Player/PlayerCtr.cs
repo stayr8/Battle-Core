@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerCtr : MonoBehaviour
+public class PlayerCtr : MonoBehaviourPun, IPunObservable
 {
     [Header("Controls")]
     public string playerName = "chan";
@@ -40,6 +41,7 @@ public class PlayerCtr : MonoBehaviour
     public Quaternion currRot;
 
     private PhotonView pv;
+    HealthSystem HS;
 
 
     private void Start()
@@ -70,10 +72,12 @@ public class PlayerCtr : MonoBehaviour
 
     void Update()
     {
-        
+        if(pv.IsMine && HS.isDie == false)
+        {
             movementSM.currentState.HandleInput();
 
             movementSM.currentState.LogicUpdate();
+        }
         
     }
 
@@ -82,5 +86,25 @@ public class PlayerCtr : MonoBehaviour
         movementSM.currentState.PhysicsUpdate();
     }
 
+    //Photon
+    public void SetPlayerName(string name)
+    {
+        this.playerName = name;
+    }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(name);
+        }
+        else
+        {
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
+            SetPlayerName((string)stream.ReceiveNext());
+        }
+    }
 
 }

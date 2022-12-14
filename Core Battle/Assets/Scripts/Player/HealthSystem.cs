@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.ComponentModel;
 
 
 public class HealthSystem : MonoBehaviour
@@ -16,6 +17,8 @@ public class HealthSystem : MonoBehaviour
 
     public Image frontHealthBar;
     public Image backHealthBar;
+
+    public bool isDie = false;
 
     [SerializeField] GameObject hitVFX;
     [SerializeField] GameObject ragdoll;
@@ -132,6 +135,8 @@ public class HealthSystem : MonoBehaviour
 
     void Die()
     {
+        isDie = true;
+
         Instantiate(ragdoll, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }

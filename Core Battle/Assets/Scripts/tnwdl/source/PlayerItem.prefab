@@ -523,8 +523,8 @@ MonoBehaviour:
   highlightColor: {r: 0.13333334, g: 0.15294118, b: 0.3882353, a: 0}
   playerAvatar: {fileID: 5657537299438533384}
   avatars:
-  - {fileID: 21300000, guid: 6f8c6a1b959adeb42bf8f42c22d4cf40, type: 3}
-  - {fileID: 21300000, guid: 38daf72cb2e0ac0408f28c0cd87a00cf, type: 3}
+  - {fileID: 21300000, guid: 1b8dd86846e3896438db979535a72ca6, type: 3}
+  - {fileID: 21300000, guid: 9ddc9f84ab7801041b739e1fddce6173, type: 3}
 --- !u!1 &7728716326959146089
 GameObject:
   m_ObjectHideFlags: 0
