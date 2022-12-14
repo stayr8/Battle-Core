@@ -414,7 +414,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         }
         else
         {
-            playBtn.SetActive(false);
+           // playBtn.SetActive(false);
         }
 
         //if(healthSystem.isDie == true)
@@ -475,7 +475,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     public void OnClickStartBtn()
     {
-        PhotonNetwork.LoadLevel("TestScene");
+        PhotonNetwork.LoadLevel("demo");
     }
     public void OnClickReadyBtn()
     {

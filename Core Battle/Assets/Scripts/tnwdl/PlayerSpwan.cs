@@ -13,7 +13,7 @@ public class PlayerSpwan : MonoBehaviour
     {
         int randomNum = Random.Range(0, spawnPoints.Length);
 
-        Transform spawnPoint = spawnPoints[randomNum];
+        Transform spawnPoint = spawnPoints[0];
         GameObject playerTospawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
         PhotonNetwork.Instantiate(playerTospawn.name, spawnPoint.position, Quaternion.identity);
     }

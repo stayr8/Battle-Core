@@ -18,6 +18,7 @@ public class MousePosition : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        //playerTr = GetComponent<Transform>();
     }
 
     // Update is called once per frame

@@ -2465,13 +2465,18 @@ MonoBehaviour:
   playerSpeed: 3.5
   playerAtk: 50
   playerAtkSpeed: 1
+  Melee: 0
+  Ranged: 0
   animator: {fileID: 0}
   camera: {fileID: 0}
   agent: {fileID: 0}
   rigid: {fileID: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   heroCombat: {fileID: 0}
-  skill: 0
+  skill_1: 0
+  skill_2: 0
+  skill_3: 0
+  skill_4: 0
   currPos: {x: 0, y: 0, z: 0}
   currRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7943576759553934589
@@ -2490,6 +2495,7 @@ MonoBehaviour:
   lerpTimer: 0
   CurrentHealth: 0
   chipSpeed: 2
+  CurrentSavehp: 0
   frontHealthBar: {fileID: 2049352036}
   backHealthBar: {fileID: 305537540}
   isDie: 0
@@ -2508,8 +2514,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4da87813b56ee3479686719e26d78b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slash: {fileID: 4239663697579050731, guid: efaef22c536b9aa428d9f2c146c34c22, type: 3}
+  slash:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ST: {fileID: 5194032699920446138}
+  ST1: {fileID: 0}
+  ST2: {fileID: 0}
+  ST3: {fileID: 0}
   currentWeaponInHand: {fileID: 5659479671923144330}
 --- !u!114 &7840302899264231916
 MonoBehaviour:
@@ -2554,12 +2566,22 @@ MonoBehaviour:
   abilityImage2: {fileID: 0}
   cooldown2: 5
   ability2: 119
+  ability1Canvas2: {fileID: 0}
+  skillshot2: {fileID: 0}
+  player2: {fileID: 0}
   abilityImage3: {fileID: 0}
   cooldown3: 5
   ability3: 101
+  targetCircle: {fileID: 0}
+  indicatorRangeCircle: {fileID: 0}
+  ability2Canvas: {fileID: 0}
+  maxAbility2Distance: 0
   abilityImage4: {fileID: 0}
   cooldown4: 5
   ability4: 114
+  ability1Canvas4: {fileID: 0}
+  skillshot4: {fileID: 0}
+  player4: {fileID: 0}
 --- !u!114 &7943576759553934590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,6 +2624,10 @@ MonoBehaviour:
   basicAtkIdle: 0
   isHeroAlive: 0
   performMeleeAttack: 1
+  isMove: 1
+  performRangeAttack: 1
+  projPrefab: {fileID: 0}
+  projSpawnPoint: {fileID: 0}
 --- !u!1 &2714022498148251860
 GameObject:
   m_ObjectHideFlags: 0

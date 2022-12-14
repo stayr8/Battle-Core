@@ -23,14 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443668498}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.09499979, y: 1.189, z: 0.69599915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.747, z: 0.973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 952335620645744993}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &21105152942589678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1228,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 774013642800757902}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1278,12 +1279,22 @@ MonoBehaviour:
   abilityImage2: {fileID: 0}
   cooldown2: 5
   ability2: 119
+  ability1Canvas2: {fileID: 0}
+  skillshot2: {fileID: 0}
+  player2: {fileID: 0}
   abilityImage3: {fileID: 0}
   cooldown3: 5
   ability3: 101
+  targetCircle: {fileID: 0}
+  indicatorRangeCircle: {fileID: 0}
+  ability2Canvas: {fileID: 0}
+  maxAbility2Distance: 0
   abilityImage4: {fileID: 0}
   cooldown4: 5
   ability4: 114
+  ability1Canvas4: {fileID: 0}
+  skillshot4: {fileID: 0}
+  player4: {fileID: 0}
 --- !u!114 &774013642800757901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,8 +1332,10 @@ MonoBehaviour:
   lerpTimer: 0
   CurrentHealth: 0
   chipSpeed: 2
+  CurrentSavehp: 0
   frontHealthBar: {fileID: 774013642416129460}
   backHealthBar: {fileID: 774013643052528807}
+  isDie: 0
   hitVFX: {fileID: 1743637094903878, guid: 021a2f7a2c5bc4449b4c64a66a050e8c, type: 3}
   ragdoll: {fileID: 467442658776329179, guid: 18479df307f0b324dbebfeac92fcf62c, type: 3}
   onzone: 1
@@ -1350,7 +1363,10 @@ MonoBehaviour:
   rigid: {fileID: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   heroCombat: {fileID: 0}
-  skill: 0
+  skill_1: 0
+  skill_2: 0
+  skill_3: 0
+  skill_4: 0
   currPos: {x: 0, y: 0, z: 0}
   currRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!195 &774013642800757897
@@ -1387,9 +1403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce196a2e8e15ad64aaa41134fd58a5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projPrefab: {fileID: 4217706214631637058, guid: dca707d68c585cb48836bb7fde99b369, type: 3}
+  projPrefab: {fileID: 3498752178657340581, guid: d842b067ca7cb8c4ab3c21ad8b7f017b, type: 3}
   projSpawnPoint: {fileID: 443668499}
-  projSpawnpoint2: {fileID: 0}
+  slash: {fileID: 6069143791621258020, guid: 521dce82787287b4a88fc3c600f9ef53, type: 3}
 --- !u!114 &543450651904346592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,7 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 10
-  viewAngle: 82
+  viewAngle: 85
   targetMask:
     serializedVersion: 2
     m_Bits: 512

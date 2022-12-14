@@ -398,6 +398,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &617038171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 617038172}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &617038172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617038171}
+  m_LocalRotation: {x: -0.64896953, y: 0.629216, z: -0.3070655, w: 0.297719}
+  m_LocalPosition: {x: 0.466, y: 0, z: -0.536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9205687830615372892}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 129.357, z: -91.771}
 --- !u!1 &877008625
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +999,7 @@ GameObject:
   - component: {fileID: 4464551600592497078}
   - component: {fileID: 3606484057457846017}
   m_Layer: 5
-  m_Name: Ability 1 SkillShot Canvas (3)
+  m_Name: Ability 4 SkillShot Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1556,7 +1587,7 @@ GameObject:
   - component: {fileID: 1381240638006442129}
   - component: {fileID: 2494615335558678174}
   m_Layer: 5
-  m_Name: Ability 1 SkillShot Canvas (2)
+  m_Name: Ability 3 SkillShot Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1569,7 +1600,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619532155551078651}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0026261401, y: 0.0032113064, z: 0.83333325}
   m_ConstrainProportionsScale: 0
@@ -1581,7 +1612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.647}
+  m_AnchoredPosition: {x: 0, y: 0.74}
   m_SizeDelta: {x: 741, y: 417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5346967445619671346
@@ -2552,8 +2583,8 @@ MonoBehaviour:
   abilityImage3: {fileID: 0}
   cooldown3: 5
   ability3: 101
-  targetCircle: {fileID: 7364304816435677294}
-  indicatorRangeCircle: {fileID: 2378619894200415056}
+  targetCircle: {fileID: 2378619894200415056}
+  indicatorRangeCircle: {fileID: 7364304816435677294}
   ability2Canvas: {fileID: 5346967445619671346}
   maxAbility2Distance: 5.5
   abilityImage4: {fileID: 0}
@@ -2598,8 +2629,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4da87813b56ee3479686719e26d78b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slash: {fileID: 4239663697579050731, guid: efaef22c536b9aa428d9f2c146c34c22, type: 3}
+  slash:
+  - {fileID: 4239663697579050731, guid: efaef22c536b9aa428d9f2c146c34c22, type: 3}
+  - {fileID: 1715385927650515369, guid: cbc69b70a7fa02c418505cf30b415b43, type: 3}
+  - {fileID: 3712707503665828137, guid: 519ff72a211faaf43b8be89b3169a13d, type: 3}
+  - {fileID: 8640795129183887542, guid: c2ae8d95860915148bdf28559c527cbb, type: 3}
   ST: {fileID: 974593934585368911}
+  ST1: {fileID: 617038172}
+  ST2: {fileID: 9205687830615372892}
+  ST3: {fileID: 9205687830615372892}
   currentWeaponInHand: {fileID: 5659479671923144330}
 --- !u!114 &7943576759553934590
 MonoBehaviour:
@@ -2690,6 +2728,7 @@ Transform:
   - {fileID: 7832619390918322868}
   - {fileID: 5563520713067515287}
   - {fileID: 4479393123325020705}
+  - {fileID: 617038172}
   m_Father: {fileID: 4953830771479655687}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4041,7 +4080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4479393123325020705}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: WeaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5203,7 +5242,7 @@ GameObject:
   - component: {fileID: 8155834677239882297}
   - component: {fileID: 7688153138809705303}
   m_Layer: 5
-  m_Name: Ability 1 SkillShot Canvas (1)
+  m_Name: Ability 2 SkillShot Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5512,6 +5551,10 @@ PrefabInstance:
       value: 1HSword
       objectReference: {fileID: 0}
     - target: {fileID: 343809541798941501, guid: 2121ca4c57d18014ebde5e26cefa528a, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 343809541798941501, guid: 2121ca4c57d18014ebde5e26cefa528a, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -5573,7 +5616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1883190768647645380, guid: 2121ca4c57d18014ebde5e26cefa528a, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5462281975828058572, guid: 2121ca4c57d18014ebde5e26cefa528a, type: 3}
       propertyPath: m_LocalPosition.y
