@@ -11,7 +11,7 @@ public class FieldOfView : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstacleMask;
 
-    public List<GameObject> visibleTargets = new List<GameObject>();
+    public List<Transform> visibleTargets = new List<Transform>();
     public GameObject targeting;
     public float shortDis;
 
@@ -48,13 +48,13 @@ public class FieldOfView : MonoBehaviour
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if(!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
-                    visibleTargets.Add(target.transform.gameObject);
-                    print("raycast hit!");
-                    Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
+                    visibleTargets.Add(target);
+                    //print("raycast hit!");
+                    //Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
                 }
             }
         }
-
+        /*
         if(visibleTargets.Count != 0)
         {
             if(targetInViewRadius != null)
@@ -85,7 +85,16 @@ public class FieldOfView : MonoBehaviour
         else if(visibleTargets.Count == 0 && targetingUI != null)
         {
             targetingUI.SetActive(false);
+        }*/
+    }
+
+    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    {
+        if(!angleIsGlobal)
+        {
+            angleInDegrees += transform.eulerAngles.y;
         }
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 
     

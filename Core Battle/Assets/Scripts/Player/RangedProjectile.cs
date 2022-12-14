@@ -33,6 +33,7 @@ public class RangedProjectile : MonoBehaviour
         rigid = GetComponentInChildren<Rigidbody>();
         FieldOfView fieldOfView = GameObject.Find("Player2").GetComponent<FieldOfView>();
         missileTarget = fieldOfView.targeting;
+        
         /*
         if(flash != null)
         {
@@ -50,7 +51,7 @@ public class RangedProjectile : MonoBehaviour
                 Destroy(flashInstance, flashPsParts.main.duration);
             }
         }*/
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
@@ -73,12 +74,12 @@ public class RangedProjectile : MonoBehaviour
         Destroy(this.gameObject, 3f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
         rigid.constraints = RigidbodyConstraints.FreezeAll;
         speed = 0;
 
-        if (collision.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy")
         {
             int layerMask = 1 << 9;
             if (Physics.Raycast(transform.position, transform.position - transform.up, out hit, ArrowLength, layerMask))
@@ -87,14 +88,28 @@ public class RangedProjectile : MonoBehaviour
                 {
                     enemy.TakeDamage(damage);
                     enemy.HitVFX(hit.point);
-                    Destroy(gameObject);
+                    Destroy(gameObject, 1f);
                 }
             }
-            
+
         }
-        else if(collision.gameObject.tag == "Box")
+        else if (col.gameObject.tag == "Player")
         {
-            collision.transform.GetComponent<Box>().Mining();
+            int layerMask2 = 1 << 8;
+            if (Physics.Raycast(transform.position, transform.position - transform.up, out hit, ArrowLength, layerMask2))
+            {
+                if (hit.transform.TryGetComponent(out HealthSystem health))
+                {
+                    health.TakeDamage(damage);
+                    health.HitVFX(hit.point);
+                    Destroy(gameObject, 1f);
+                }
+            }
+        }
+        else if (col.gameObject.tag == "Box")
+        {
+            col.transform.GetComponent<Box>().Mining();
+            Destroy(gameObject, 1f);
         }
     }
     

@@ -28,6 +28,13 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item>();
 
+    public bool hillCheck = false;
+
+    public bool Skill_1 = false;
+    public bool Skill_2 = false;
+    public bool Skill_3 = false;
+    public bool Skill_4 = false;
+
     public bool Add(Item item)
     {
         if (!item.isDefaultItem)
@@ -59,5 +66,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void Hill(Item item)
+    {
+        if(item.hp)
+        {
+            hillCheck = true;
+        }
+    }
 
 }

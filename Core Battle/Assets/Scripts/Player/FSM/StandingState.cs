@@ -56,10 +56,9 @@ public class StandingState : State
         // 좌 클릭시 공격
         if (Input.GetMouseButtonDown(0))
         {
-            if (!skillCheck)
-            {
-                attack = true;
-            }
+           
+            attack = true;
+            
             RaycastHit hits;
             if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hits))
             {
