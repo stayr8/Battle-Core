@@ -10,16 +10,17 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public GameObject leftArrow;
     public GameObject rightArrow;
 
-    public Text playerName;
 
+    public Sprite[] avatars;
+    public Text playerName;
+    public Image playerAvatar;
+    
     public Color highlightColor;
 
     Image backgroundImage;
     Player player;
 
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
-    public Image playerAvatar;
-    public Sprite[] avatars;
 
     public void SetPlayerInfo(Player _player)
     {
