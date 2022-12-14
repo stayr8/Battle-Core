@@ -7,6 +7,10 @@ public class StandingState : State
     bool isMove;
     public bool attack;
     public bool skillCheck;
+    public bool skillCheck2;
+    public bool skillCheck3;
+    public bool skillCheck4;
+    public bool allskillcheck;
 
 
     public Vector3 Dir;
@@ -23,7 +27,12 @@ public class StandingState : State
 
         isMove = false;
         attack = false;
-        playerCtr.skill = false;
+        playerCtr.skill_1 = false;
+        playerCtr.skill_2 = false;
+        playerCtr.skill_3 = false;
+        playerCtr.skill_4 = false;
+        allskillcheck = false;
+
         skillCheck = false;
         // 플레이어 속도 받아옴.
         playerCtr.agent.speed = playerCtr.playerSpeed;
@@ -53,12 +62,15 @@ public class StandingState : State
                 }
             }
         }
+
+       
+
         // 좌 클릭시 공격
         if (Input.GetMouseButtonDown(0))
         {
-           
-            attack = true;
-            
+            if(!allskillcheck)
+                attack = true;
+
             RaycastHit hits;
             if (Physics.Raycast(playerCtr.camera.ScreenPointToRay(Input.mousePosition), out hits))
             {
@@ -68,12 +80,46 @@ public class StandingState : State
                 }
             }
         }
+
+
+
         // Q 클릭
         if (Input.GetButtonDown("Skill_1"))
         {
-            if (!playerCtr.skill)
+            if (!playerCtr.skill_1)
             {
                 skillCheck = true;
+                allskillcheck = true;
+                //skill = true;
+            }
+
+        }
+        else if (Input.GetButtonDown("Skill_2"))
+        {
+            if (!playerCtr.skill_2)
+            {
+                skillCheck2 = true;
+                allskillcheck = true;
+                //skill = true;
+            }
+
+        }
+        else if (Input.GetButtonDown("Skill_3"))
+        {
+            if (!playerCtr.skill_3)
+            {
+                skillCheck3 = true;
+                allskillcheck = true;
+                //skill = true;
+            }
+
+        }
+        else if (Input.GetButtonDown("Skill_4"))
+        {
+            if (!playerCtr.skill_4)
+            {
+                skillCheck4 = true;
+                allskillcheck = true;
                 //skill = true;
             }
 
@@ -95,7 +141,7 @@ public class StandingState : State
                 }
             }
         }
-        else if(playerCtr.heroCombat.targetedItem != null)
+        else if (playerCtr.heroCombat.targetedItem != null)
         {
             if (playerCtr.heroCombat.targetedItem.GetComponent<HeroCombat>() != null)
             {
@@ -105,7 +151,7 @@ public class StandingState : State
                 }
             }
         }
-       
+
 
 
         playerCtr.animator.SetFloat("speed", playerCtr.agent.velocity.magnitude);
@@ -116,11 +162,36 @@ public class StandingState : State
             playerCtr.animator.SetTrigger("attack");
             stateMachine.ChangeState(playerCtr.attacking);
         }
-        else if (playerCtr.skill)
+        else if (playerCtr.skill_1)
         {
             playerCtr.agent.enabled = false;
             playerCtr.animator.SetTrigger("skill_1");
             skillCheck = false;
+            allskillcheck = false;
+            stateMachine.ChangeState(playerCtr.skilling);
+        }
+        else if (playerCtr.skill_2)
+        {
+            playerCtr.agent.enabled = false;
+            playerCtr.animator.SetTrigger("skill_2");
+            skillCheck2 = false;
+            allskillcheck = false;
+            stateMachine.ChangeState(playerCtr.skilling);
+        }
+        else if (playerCtr.skill_3)
+        {
+            playerCtr.agent.enabled = false;
+            playerCtr.animator.SetTrigger("skill_3");
+            skillCheck3 = false;
+            allskillcheck = false;
+            stateMachine.ChangeState(playerCtr.skilling);
+        }
+        else if (playerCtr.skill_4)
+        {
+            playerCtr.agent.enabled = false;
+            playerCtr.animator.SetTrigger("skill_4");
+            skillCheck4 = false;
+            allskillcheck = false;
             stateMachine.ChangeState(playerCtr.skilling);
         }
     }
@@ -129,21 +200,20 @@ public class StandingState : State
     {
         base.PhysicsUpdate();
 
-        if (isMove)
-        {
-            // Character move stop
-            if (playerCtr.agent.velocity.magnitude == 0f)
-            {
-                isMove = false;
-                return;
-            }
-            // Character Dir get
-            var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
-            var dirXZ = new Vector3(dir.x, 0f, dir.z);
-            Quaternion targetRot = Quaternion.LookRotation(dirXZ);
-            playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
 
+        // Character move stop
+        if (playerCtr.agent.velocity.magnitude == 0f)
+        {
+            isMove = false;
+            return;
         }
+        // Character Dir get
+        var dir = new Vector3(playerCtr.agent.steeringTarget.x, playerCtr.transform.position.y, playerCtr.agent.steeringTarget.z) - playerCtr.transform.position;
+        var dirXZ = new Vector3(dir.x, 0f, dir.z);
+        Quaternion targetRot = Quaternion.LookRotation(dirXZ);
+        playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);
+
+
 
     }
 

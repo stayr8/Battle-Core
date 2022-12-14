@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4239663697579050730}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: vfx_Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4239663698271044166}
   - component: {fileID: 4239663698271044164}
   - component: {fileID: 4239663698271044165}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: vfxgraph_Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -57,7 +57,7 @@ public class SkillState : State
 
         
         // 방향 계속 최신화
-        var dir = SkillDir - playerCtr.transform.position;
+        var dir = new Vector3(SkillDir.x, playerCtr.transform.position.y, SkillDir.z) - playerCtr.transform.position;
         var dirXZ = new Vector3(dir.x, 0f, dir.z);
         Quaternion targetRot = Quaternion.LookRotation(dirXZ);
         playerCtr.rigid.rotation = Quaternion.RotateTowards(playerCtr.transform.rotation, targetRot, 13.0f);

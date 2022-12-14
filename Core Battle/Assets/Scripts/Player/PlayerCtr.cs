@@ -34,7 +34,10 @@ public class PlayerCtr : MonoBehaviourPun, IPunObservable
     public HeroCombat heroCombat;
 
 
-    public bool skill;
+    public bool skill_1;
+    public bool skill_2;
+    public bool skill_3;
+    public bool skill_4;
 
     //Photon
     public Vector3 currPos;
@@ -72,13 +75,14 @@ public class PlayerCtr : MonoBehaviourPun, IPunObservable
 
     void Update()
     {
+        /*
         if(pv.IsMine && HS.isDie == false)
         {
-            movementSM.currentState.HandleInput();
+           
+        }*/
+        movementSM.currentState.HandleInput();
 
-            movementSM.currentState.LogicUpdate();
-        }
-        
+        movementSM.currentState.LogicUpdate();
     }
 
     private void FixedUpdate()

@@ -35,7 +35,7 @@ public class Box : MonoBehaviour
 
     private void Destruction()
     {
-        Vector3 pos = new Vector3(Boxbreak.transform.position.x, Boxbreak.transform.position.y + 0.5f, Boxbreak.transform.position.z);
+        Vector3 pos = new Vector3(Boxbreak.transform.position.x, Boxbreak.transform.position.y + 0.2f, Boxbreak.transform.position.z);
         for(int i = 0; i<count; i++)
         {
             Instantiate(go_item_prefab, pos, Quaternion.identity);

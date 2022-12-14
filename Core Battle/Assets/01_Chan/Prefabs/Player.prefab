@@ -973,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &104588423823607123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1561,7 +1561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6194262339933004199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1575,6 +1575,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4884634074948236637}
+  - {fileID: 904497241875789050}
   m_Father: {fileID: 3444747422227899739}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2473,7 +2474,10 @@ MonoBehaviour:
   rigid: {fileID: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   heroCombat: {fileID: 0}
-  skill: 0
+  skill_1: 0
+  skill_2: 0
+  skill_3: 0
+  skill_4: 0
   currPos: {x: 0, y: 0, z: 0}
   currRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7943576759553934589
@@ -2492,8 +2496,10 @@ MonoBehaviour:
   lerpTimer: 0
   CurrentHealth: 0
   chipSpeed: 2
+  CurrentSavehp: 0
   frontHealthBar: {fileID: 2049352036}
   backHealthBar: {fileID: 305537540}
+  isDie: 0
   hitVFX: {fileID: 1743637094903878, guid: 021a2f7a2c5bc4449b4c64a66a050e8c, type: 3}
   ragdoll: {fileID: 6421397963695188604, guid: 41d94746122781747a26902eeb894cf1, type: 3}
   onzone: 1
@@ -2540,12 +2546,22 @@ MonoBehaviour:
   abilityImage2: {fileID: 0}
   cooldown2: 5
   ability2: 119
+  ability1Canvas2: {fileID: 9115143959837029582}
+  skillshot2: {fileID: 706420618051883198}
+  player2: {fileID: 3444747422227899739}
   abilityImage3: {fileID: 0}
   cooldown3: 5
   ability3: 101
+  targetCircle: {fileID: 7364304816435677294}
+  indicatorRangeCircle: {fileID: 2378619894200415056}
+  ability2Canvas: {fileID: 5346967445619671346}
+  maxAbility2Distance: 5.5
   abilityImage4: {fileID: 0}
   cooldown4: 5
   ability4: 114
+  ability1Canvas4: {fileID: 4280800611060930539}
+  skillshot4: {fileID: 2966982634565649048}
+  player4: {fileID: 3444747422227899739}
 --- !u!114 &7943576759553934593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2603,7 +2619,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6720032961386035910}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2994,6 +3011,82 @@ Transform:
   m_Father: {fileID: 1739788496877434122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3554239189125309254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904497241875789050}
+  - component: {fileID: 3037092488801313174}
+  - component: {fileID: 7364304816435677294}
+  m_Layer: 5
+  m_Name: SkilltargetRange Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &904497241875789050
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554239189125309254}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5.7183886, y: 0.01826992, z: 1.4058}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6194262339933004199}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -184}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3037092488801313174
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554239189125309254}
+  m_CullTransparentMesh: 1
+--- !u!114 &7364304816435677294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554239189125309254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a0d698c9dc164e349924d7cd38b6fe3a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3714745492226809358
 GameObject:
   m_ObjectHideFlags: 0
@@ -3304,7 +3397,7 @@ GameObject:
   - component: {fileID: 1947724134374919696}
   - component: {fileID: 706420618051883198}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Skillshot Image2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3474,7 +3567,7 @@ GameObject:
   - component: {fileID: 540321459455863007}
   - component: {fileID: 2378619894200415056}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SkillRange Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3488,8 +3581,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4759560021246555958}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1.363}
-  m_LocalScale: {x: 2.6073177, y: 0.02718837, z: 1.4058}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 22.40781, y: 0.067752816, z: 1.4058}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6194262339933004199}
@@ -3528,7 +3621,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 762111596344a4e4ab10a5cf06f24c1a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee7117434709f2248b89bd2c5b5aae21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4109,7 +4202,7 @@ GameObject:
   - component: {fileID: 4760461720299134656}
   - component: {fileID: 2966982634565649048}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Skillshot Image4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4123,8 +4216,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6382910710681245957}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1.363}
-  m_LocalScale: {x: 2.6073177, y: 0.02718837, z: 1.4058}
+  m_LocalPosition: {x: 0, y: 0, z: 2.379}
+  m_LocalScale: {x: 6.230968, y: 0.0461441, z: 1.4058}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 104588423823607123}
@@ -4155,7 +4248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 8316ac801dfce0a468a786c097ef5933, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4163,7 +4256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 762111596344a4e4ab10a5cf06f24c1a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5115,7 +5208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4336121229724338054
 RectTransform:
   m_ObjectHideFlags: 0

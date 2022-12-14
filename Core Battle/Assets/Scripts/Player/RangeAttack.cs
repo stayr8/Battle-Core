@@ -9,6 +9,10 @@ public class RangeAttack : MonoBehaviour
     public GameObject projPrefab;
     public Transform projSpawnPoint;
 
+    public GameObject slash;
+    private GameObject Slashs;
+
+
     private PlayerCtr playerCtr;
 
     // Start is called before the first frame update
@@ -29,4 +33,13 @@ public class RangeAttack : MonoBehaviour
         Instantiate(projPrefab, projSpawnPoint.transform.position, projSpawnPoint.transform.rotation); 
     }
 
+    public void StartRangedSkill()
+    {
+        Slashs = Instantiate(slash, projSpawnPoint.transform.position, projSpawnPoint.rotation);
+    }
+
+    public void EndRangedSkill()
+    {
+        Destroy(Slashs);
+    }
 }
