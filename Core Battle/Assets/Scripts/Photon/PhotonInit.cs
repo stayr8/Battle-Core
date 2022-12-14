@@ -26,6 +26,8 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public GameObject playBtn;
     public GameObject readyPtn;
 
+    public GameObject ResultPanel;
+
     public Text roomName;
 
     [Header("InputField")]
@@ -63,7 +65,10 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     List<RoomInfo> myList = new List<RoomInfo>();
     private int curPage = 1, maxPage, multiple, roomNum;
 
+    Text resultInfo;
     Text connectionInfo;
+
+    HealthSystem healthSystem;
     PhotonView pv;
 
     public static PhotonInit Instance
@@ -232,6 +237,26 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         }
     }
 
+    public void GameExitOnClick()
+    {
+        ResultPanel.SetActive(false);
+
+        Application.Quit();
+    }
+    public void ReturnLobbyOnClick()
+    {
+        ResultPanel.SetActive(false);
+
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel("LoginScene");
+    }
+    public void gameResult()
+    {
+        ResultPanel.SetActive(true);
+
+        resultInfo.text = PhotonNetwork.CurrentRoom.Name + "님의 등수는" + PhotonNetwork.PlayerList.Length.ToString() + "위 입니다!";
+    }
+
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
@@ -391,6 +416,11 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         {
             playBtn.SetActive(false);
         }
+
+        //if(healthSystem.isDie == true)
+        //{
+        //    gameResult();
+        //}
     }
 
     IEnumerator ShowPwWrongMsg()
@@ -410,7 +440,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         }
 
         GameObject tempPlayer = PhotonNetwork.Instantiate("Sowrd", new Vector3(0, 0, 0), Quaternion.identity, 0);
-        tempPlayer.GetComponent<PlayerCtrl>().SetPlayerName(playerID);
+        //tempPlayer.GetComponent<PlayerCtrl>().SetPlayerName(playerID);
         pv = GetComponent<PhotonView>();
 
         yield return null;
