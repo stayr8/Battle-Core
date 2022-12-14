@@ -88,7 +88,7 @@ public class RangedProjectile : MonoBehaviour
                 {
                     enemy.TakeDamage(damage);
                     enemy.HitVFX(hit.point);
-                    Destroy(gameObject);
+                    Destroy(gameObject, 1f);
                 }
             }
 
@@ -102,14 +102,14 @@ public class RangedProjectile : MonoBehaviour
                 {
                     health.TakeDamage(damage);
                     health.HitVFX(hit.point);
-                    Destroy(gameObject);
+                    Destroy(gameObject, 1f);
                 }
             }
         }
         else if (col.gameObject.tag == "Box")
         {
             col.transform.GetComponent<Box>().Mining();
-            Destroy(gameObject);
+            Destroy(gameObject, 1f);
         }
     }
     

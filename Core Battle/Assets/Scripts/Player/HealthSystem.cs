@@ -12,6 +12,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private float lerpTimer;
     [SerializeField] private float CurrentHealth;
     [SerializeField] private float chipSpeed = 2;
+    [SerializeField] private float CurrentSavehp = 0;
 
     public Image frontHealthBar;
     public Image backHealthBar;
@@ -35,6 +36,12 @@ public class HealthSystem : MonoBehaviour
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         UpdateHealthUI();
+
+        if(Inventory.instance.hillCheck)
+        {
+            Hill(10);
+            Inventory.instance.hillCheck = false;
+        }
     }
 
     private void FixedUpdate()
@@ -137,8 +144,15 @@ public class HealthSystem : MonoBehaviour
 
     public void IncreaseHealth(int level)
     {
+        CurrentSavehp = CurrentHealth;
         MaxHealth += (CurrentHealth * 0.01f) * ((100 - level) * 0.1f);
         CurrentHealth = MaxHealth;
+        CurrentHealth -= CurrentSavehp;
+    }
+
+    public void Hill(int hill)
+    {
+        CurrentHealth += hill;
     }
 }
 

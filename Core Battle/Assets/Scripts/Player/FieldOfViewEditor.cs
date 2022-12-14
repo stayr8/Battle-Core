@@ -8,6 +8,11 @@ public class FieldOfViewEditor : Editor
 {
     void OnSceneGUI()
     {
+        if(target == null)
+        {
+            return;
+        }
+
         FieldOfView fow = (FieldOfView)target;
         Handles.color = Color.white;
         Handles.DrawWireArc(fow.transform.position, Vector3.up, Vector3.forward, 360, fow.viewRadius);
@@ -18,9 +23,12 @@ public class FieldOfViewEditor : Editor
         Handles.DrawLine(fow.transform.position, fow.transform.position + vierAngleB * fow.viewRadius);
 
         Handles.color = Color.red;
-        foreach(Transform visibleTarget in fow.visibleTargets)
+        if (target != null)
         {
-            Handles.DrawLine(fow.transform.position, visibleTarget.position);
+            foreach (Transform visibleTarget in fow.visibleTargets)
+            {
+                //Handles.DrawLine(fow.transform.position, visibleTarget.position);
+            }
         }
     }
 }

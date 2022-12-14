@@ -1274,6 +1274,10 @@ PrefabInstance:
       propertyPath: count
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 95000010744102462, guid: 8d9630accd890e6479de8eae1fa98c2d, type: 3}
+      propertyPath: go_item_prefab
+      value: 
+      objectReference: {fileID: 5923925906804809884, guid: 02157603324aff04a881336cb55f8ab9, type: 3}
     - target: {fileID: 3339387301401986485, guid: 8d9630accd890e6479de8eae1fa98c2d, type: 3}
       propertyPath: m_RootOrder
       value: 1

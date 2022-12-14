@@ -37,14 +37,16 @@ public class Abilities : MonoBehaviour
     bool isCooldown4 = false;
     public KeyCode ability4;
 
+    Item item;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        abilityImage1.fillAmount = 0;
-        abilityImage2.fillAmount = 0;
-        abilityImage3.fillAmount = 0;
-        abilityImage4.fillAmount = 0;
+        abilityImage1.fillAmount = 1;
+        abilityImage2.fillAmount = 1;
+        abilityImage3.fillAmount = 1;
+        abilityImage4.fillAmount = 1;
 
         skillshot.GetComponent<Image>().enabled = false;
         
@@ -53,10 +55,23 @@ public class Abilities : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ability1();
-        Ability2();
-        Ability3();
-        Ability4();
+        
+        if (Inventory.instance.Skill_1)
+        {
+            Ability1();
+        }
+        if (Inventory.instance.Skill_2)
+        {
+            Ability2();
+        }
+        if (Inventory.instance.Skill_3)
+        {
+            Ability3();
+        }
+        if (Inventory.instance.Skill_4)
+        {
+            Ability4();
+        }
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

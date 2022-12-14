@@ -8,6 +8,8 @@ public class InventorySlot : MonoBehaviour
 
     Item item;
 
+    int hp = 20;
+
     public void AddItem (Item newItem)
     {
         item = newItem;
@@ -33,9 +35,16 @@ public class InventorySlot : MonoBehaviour
 
     public void UseItem()
     {
-        if(item != null)
+        if (item != null)
         {
             item.Use();
+            Inventory.instance.Remove(item);
+
+            Inventory.instance.Hill(item);
+            //Inventory.instance.hillCheck = true;
+            //Inventory.instance.Skill_1 = true;
+            
+            
         }
     }
 }

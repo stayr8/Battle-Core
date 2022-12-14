@@ -8,7 +8,11 @@ public class Item : ScriptableObject
         Equipment,
         Used,
         Ingredient,
-        Potion
+        Potion,
+        Skill_1,
+        Skill_2,
+        Skill_3,
+        Skill_4
     }
 
     new public string name = "New Item";
@@ -16,7 +20,13 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public GameObject itemPrefab;
     public bool isDefaultItem = false;
-    
+
+    public bool hp = false;
+    public bool Skill_1 = false;
+    public bool Skill_2 = false;
+    public bool Skill_3 = false;
+    public bool Skill_4 = false;
+
 
     public int hpHill;
     public int mpHill;
