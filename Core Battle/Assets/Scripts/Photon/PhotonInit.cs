@@ -22,6 +22,11 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public GameObject PwErrorLog;
     public GameObject PwConfirmBtn;
     public GameObject PWPanelCloseBtn;
+    public GameObject SelectChar;
+    public GameObject playBtn;
+    public GameObject readyPtn;
+
+    public Text roomName;
 
     [Header("InputField")]
     public InputField PlayerInput;
@@ -43,15 +48,23 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public string playerID = "";
     public string privateRoom;
     public int hashtablecount;
+    public int readyCheck;
 
     private bool isGameStart = false;
     private bool isLogin = false;
+    private bool isReady = false;
     private string connectionState = "";
+
+    [Header("SelectChar")]
+    public List<PlayerItem> playerItemsList = new List<PlayerItem>();
+    public PlayerItem playerItemPrefab;
+    public Transform playerItemParent;
 
     List<RoomInfo> myList = new List<RoomInfo>();
     private int curPage = 1, maxPage, multiple, roomNum;
 
     Text connectionInfo;
+    PhotonView pv;
 
     public static PhotonInit Instance
     {
@@ -96,7 +109,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     public void CreatRoom()
     {
-        PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Game" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 10 });
+        PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Game" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 3, BroadcastPropsChangeToAll = true });
         LobbyPanel.SetActive(false);
     }
     public void Disconnect()
@@ -116,7 +129,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public void CreatNewRoom()
     {
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 10;
+        roomOptions.MaxPlayers = 3;
         roomOptions.CustomRoomProperties = new Hashtable()
         {
             {"password", RoomPwInput.text }
@@ -129,7 +142,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         }
         else
         {
-            PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Game" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 10 });
+            PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Game" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 3 });
         }
 
         MakeRoomPanel.SetActive(false);
@@ -203,6 +216,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
             LobbyPanel.SetActive(false);
             RoomPanel.SetActive(true);
 
+            PhotonNetwork.AutomaticallySyncScene = true;    //?
             PhotonNetwork.JoinLobby();
         }
         else
@@ -224,6 +238,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
             connectionInfo.text = connectionState;
 
         myList.Clear();
+        roomName.text = PhotonNetwork.CurrentRoom.Name;
 
         //PhotonNetwork.JoinRandomRoom();
     }
@@ -249,13 +264,19 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
+        LobbyPanel.SetActive(false);
+        SelectChar.SetActive(true);
+
         connectionState = "룸 접속 완료!";
         if (connectionInfo)
             connectionInfo.text = connectionState;
 
         isLogin = true;
-        
-        PhotonNetwork.LoadLevel("SampleScene");
+        PlayerPrefs.SetInt("LogIn", 1);
+
+        UpdatePLayerList();
+
+        //PhotonNetwork.LoadLevel("SampleScene");
     }
     public override void OnCreatedRoom()
     {
@@ -293,6 +314,16 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 
         MyListRenewal();
     }
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        UpdatePLayerList();
+    }
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        UpdatePLayerList();
+    }
 
     private void MyListRenewal()
     {
@@ -311,12 +342,17 @@ public class PhotonInit : MonoBehaviourPunCallbacks
             CellBtn[i].transform.GetChild(1).GetComponent<Text>().text = (multiple + i < myList.Count) ? myList[multiple + i].PlayerCount + "/" + myList[multiple + i].MaxPlayers : "";
         }
     }
+    private void OnApplicationQuit()
+    {
+        readyCheck = 0;
+        isReady = false;
+        PlayerPrefs.SetInt("LogIn", 0);
+    }
 
     private void Awake()
     {
         PhotonNetwork.GameVersion = "CoreBattle 1.0";
         PhotonNetwork.AutomaticallySyncScene = true;
-
         PhotonNetwork.ConnectUsingSettings();
 
         if (GameObject.Find("ConnectionInfoText") != null)
@@ -332,15 +368,27 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
+        if (PlayerPrefs.GetInt("LogIn") == 1)
+        {
+            isLogin = true;
+        }
+
         if (isGameStart == false && SceneManager.GetActiveScene().name == "SampleScene" && isLogin == true)
         {
             isGameStart = true;
+
+            StartCoroutine(CreatPlayer());
+        }
+
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2 && isReady == true)
+        {
+            playBtn.SetActive(true);
+        }
+        else
+        {
+            playBtn.SetActive(false);
         }
     }
-    //private void OnGUI()
-    //{
-    //    GUILayout.Label(connectionState);
-    //}
 
     IEnumerator ShowPwWrongMsg()
     {
@@ -349,6 +397,61 @@ public class PhotonInit : MonoBehaviourPunCallbacks
             PwErrorLog.SetActive(true);
             yield return new WaitForSeconds(3.0f);
             PwErrorLog.SetActive(false);
+        }
+    }
+    IEnumerator CreatPlayer()
+    {
+        while (!isGameStart)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        GameObject tempPlayer = PhotonNetwork.Instantiate("Sowrd", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        tempPlayer.GetComponent<PlayerCtrl>().SetPlayerName(playerID);
+        pv = GetComponent<PhotonView>();
+
+        yield return null;
+    }
+
+    //캐릭터 선택
+    private void UpdatePLayerList()
+    {
+        foreach (PlayerItem item in playerItemsList)
+        {
+            Destroy(item.gameObject);
+        }
+        playerItemsList.Clear();
+
+        if (PhotonNetwork.CurrentRoom == null)
+        {
+            return;
+        }
+
+        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
+            newPlayerItem.SetPlayerInfo(player.Value);
+
+            if(player.Value == PhotonNetwork.LocalPlayer)
+            {
+                newPlayerItem.ApplyLocalChanges();
+            }
+
+            playerItemsList.Add(newPlayerItem);
+        }
+    }
+    public void OnClickStartBtn()
+    {
+        PhotonNetwork.LoadLevel("TestScene");
+    }
+    public void OnClickReadyBtn()
+    {
+        readyCheck++;
+        Debug.Log(readyCheck);
+
+        if(readyCheck >= PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            isReady = true;
         }
     }
 }
