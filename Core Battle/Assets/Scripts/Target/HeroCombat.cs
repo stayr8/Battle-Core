@@ -108,58 +108,5 @@ public class HeroCombat : MonoBehaviour
        
 
     }
-    /*
-    IEnumerator MeleeAttackInterval()
-    {
-        performMeleeAttack = false;
-
-        yield return new WaitForSeconds(playerCtr.playerAtkSpeed / ((100 + playerCtr.playerAtkSpeed) * 0.01f));
-
-        if (targetedEnemy == null)
-        {
-            performMeleeAttack = true;
-        }
-    }
-
-    IEnumerator RangedAttackInterval()
-    {
-        performRangeAttack = false;
-        playerCtr.animator.SetBool("attack", true);
-
-        yield return new WaitForSeconds(playerCtr.playerAtkSpeed / ((100 + playerCtr.playerAtkSpeed) * 0.01f));
-
-        if (targetedEnemy == null)
-        {
-            playerCtr.animator.SetBool("attack", false);
-            performRangeAttack = true;
-        }
-    }
-    */
-    /*
-    public void RangeAttack()
-    {
-        if (targetedEnemy != null)
-        {
-            if (targetedEnemy.GetComponent<Targetable>().targetType == Targetable.TargetType.Minion)
-            {
-                SpawnRangedProj("Minion", targetedEnemy);
-            }
-        }
-        performRangeAttack = true;
-    }
-
-    void SpawnRangedProj(string typeOfEnemy, GameObject targetedEnemyObj)
-    {
-        float dmg = playerCtr.playerAtk;
-
-        Instantiate(projPrefab, projSpawnPoint.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-
-        if (typeOfEnemy == "Minion")
-        {
-            projPrefab.GetComponent<RangedProjectile>().targetType = typeOfEnemy;
-
-            projPrefab.GetComponent<RangedProjectile>().target = targetedEnemyObj;
-            projPrefab.GetComponent<RangedProjectile>().targetSet = true;
-        }
-    }*/
+    
 }

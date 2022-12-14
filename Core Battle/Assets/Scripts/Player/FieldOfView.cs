@@ -49,43 +49,10 @@ public class FieldOfView : MonoBehaviour
                 if(!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
-                    //print("raycast hit!");
-                    //Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
                 }
             }
         }
-        /*
-        if(visibleTargets.Count != 0)
-        {
-            if(targetInViewRadius != null)
-            {
-                targetingUI.SetActive(false);
-            }
-
-            targeting = visibleTargets[0];
-
-            shortDis = Vector3.Distance(transform.position, visibleTargets[0].transform.position);
-            foreach(GameObject found in visibleTargets)
-            {
-                float distance = Vector3.Distance(transform.position, found.transform.position);
-                if(distance < shortDis)
-                {
-                    targeting = found;
-                    shortDis = distance;
-                }
-            }
-
-            Debug.Log(targeting.name);
-
-            targetingUI = targeting.transform.Find("Canvas").transform.gameObject;
-
-            targetingUI.SetActive(true);
-        }
-
-        else if(visibleTargets.Count == 0 && targetingUI != null)
-        {
-            targetingUI.SetActive(false);
-        }*/
+        
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
