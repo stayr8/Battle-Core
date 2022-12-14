@@ -87,7 +87,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     {
         Debug.Log("플레이어 ID: " + PlayerInput.text);
 
-        if (isGameStart == false && isLogin == false)
+        if (isGameStart == false && isLogin == false && isReady == false)
         {
             playerID = PlayerInput.text;
             PlayerInput.text = string.Empty;
@@ -123,8 +123,11 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         if (connectionInfo)
             connectionInfo.text = connectionState;
 
+        OnLogin();
+
         isGameStart = false;
         isLogin = false;
+        isReady = false;
     }
     public void CreatNewRoom()
     {
@@ -380,7 +383,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
             StartCoroutine(CreatPlayer());
         }
 
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2 && isReady == true)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 1 && isReady == true)
         {
             playBtn.SetActive(true);
         }
